@@ -87,7 +87,7 @@ class Order(models.Model):
 
 class OrderedPizza(models.Model):
 
-    pizza = models.ForeignKey(
+    pizza_price = models.ForeignKey(
         to='pizza.PizzaPrice',
         related_name='ordered_pizzas',
         null=True,
@@ -104,7 +104,7 @@ class OrderedPizza(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = ('pizza', 'order')
+        unique_together = ('pizza_price', 'order')
 
     def get_amount(self) -> Decimal:
         return self.pizza.price * self.count

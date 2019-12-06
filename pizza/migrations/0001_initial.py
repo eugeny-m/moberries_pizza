@@ -55,10 +55,10 @@ class Migration(migrations.Migration):
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
                 ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ordered_pizzas', to='pizza.Order')),
-                ('pizza', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='ordered_pizzas', to='pizza.PizzaPrice')),
+                ('pizza_price', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='ordered_pizzas', to='pizza.PizzaPrice')),
             ],
             options={
-                'unique_together': {('pizza', 'order')},
+                'unique_together': {('pizza_price', 'order')},
             },
         ),
     ]
