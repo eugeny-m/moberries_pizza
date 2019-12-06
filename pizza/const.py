@@ -4,12 +4,12 @@
 
 SMALL = 'small'
 MEDIUM = 'medium'
-BIG = 'big'
+LARGE = 'large'
 
 PIZZA_SIZES = (
     (SMALL, SMALL),
     (MEDIUM, MEDIUM),
-    (BIG,BIG),
+    (LARGE,LARGE),
 )
 
 # Order statuses

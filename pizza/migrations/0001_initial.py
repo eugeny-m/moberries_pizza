@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
             name='PizzaPrice',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('size', models.CharField(choices=[('small', 'small'), ('medium', 'medium'), ('big', 'big')], max_length=10)),
+                ('size', models.CharField(choices=[('small', 'small'), ('medium', 'medium'), ('large', 'large')], max_length=10)),
                 ('price', models.DecimalField(decimal_places=2, max_digits=5, verbose_name='Price of this pizza size')),
                 ('pizza', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='prices', to='pizza.Pizza')),
             ],

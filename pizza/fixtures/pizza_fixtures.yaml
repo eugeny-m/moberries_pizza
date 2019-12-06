@@ -20,7 +20,7 @@
   pk: 3
   fields:
     pizza_id: 1
-    size: big
+    size: large
     price: "9.00"
 
 # second pizza
