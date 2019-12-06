@@ -49,6 +49,13 @@ class OrderTest(TestCase):
         )
         self.assertEquals(resp.status_code, status.HTTP_201_CREATED)
 
+    def test_destroy_order(self):
+        order = Order.objects.get(id=1)
+        resp = self.client.delete(
+            path=reverse('order-detail', args=[order.id]),
+        )
+        self.assertEquals(resp.status_code, status.HTTP_204_NO_CONTENT)
+
     def test_orderedpizza_list_filters(self):
 
         # single-using filters
