@@ -1,0 +1,28 @@
+# first order
+- model: pizza.order
+  pk: 1
+  fields:
+    customer_name: "customer_1"
+    customer_phone: "1234567810"
+    customer_email: "customer_1@example.com"
+    created: "2019-12-06 18:29:36.946751+00:00"
+    updated: "2019-12-06 18:29:36.946751+00:00"
+
+# second order, with pizzas
+- model: pizza.order
+  pk: 2
+  fields:
+    customer_name: "customer_1"
+    customer_phone: "1234567810"
+    customer_email: "customer_1@example.com"
+    created: "2019-12-06 18:29:36.946751+00:00"
+    updated: "2019-12-06 18:29:36.946751+00:00"
+    amount: "4.55"
+- model: pizza.orderedpizza
+  pk: 1
+  fields:
+    pizza_price_id: 1
+    count: 1
+    order_id: 2
+    created: "2019-12-06 18:29:36.946751+00:00"
+    updated: "2019-12-06 18:29:36.946751+00:00"

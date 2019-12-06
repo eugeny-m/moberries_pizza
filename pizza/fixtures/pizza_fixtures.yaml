@@ -1,0 +1,43 @@
+# first pizza
+- model: pizza.pizza
+  pk: 1
+  fields:
+    name: Carbonara
+    description: Carbonara description
+- model: pizza.pizzaprice
+  pk: 1
+  fields:
+    pizza_id: 1
+    size: small
+    price: "4.55"
+- model: pizza.pizzaprice
+  pk: 2
+  fields:
+    pizza_id: 1
+    size: medium
+    price: "7.00"
+- model: pizza.pizzaprice
+  pk: 3
+  fields:
+    pizza_id: 1
+    size: big
+    price: "9.00"
+
+# second pizza
+- model: pizza.pizza
+  pk: 2
+  fields:
+    name: Pepperoni
+    description: Pepperoni description
+- model: pizza.pizzaprice
+  pk: 4
+  fields:
+    pizza_id: 2
+    size: small
+    price: "1.00"
+- model: pizza.pizzaprice
+  pk: 5
+  fields:
+    pizza_id: 2
+    size: medium
+    price: "2.00"
