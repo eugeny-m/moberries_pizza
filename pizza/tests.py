@@ -22,8 +22,25 @@ class OrderTest(TestCase):
     ORDER_POST_DATA = {
         'customer_name': 'customer_1',
         'customer_phone': '1234567810',
-        'customer_email': 'customer_1@example.com',
+        'customer_email': '1@example.com',
     }
+
+    fixtures = [
+        'pizza/fixtures/pizza_fixtures.yaml',
+        'pizza/fixtures/order_fixtures.yaml',
+    ]
+
+    # filter_name -- filter value -- expected result(order_id)
+    FILTERS_PARAMS = (
+        ('customer_email', '1@example.com', [1, 2]),
+        ('customer_email__in', '1@example.com', [1, 2]),
+        ('customer_email__in', '1@example.com,non@example.com', [1, 2]),
+        ('customer_email__in', '1@example.com,2@example.com', [1, 2, 3]),
+        ('status', 0, [1, 2]),
+        ('status__in', '0', [1, 2]),
+        ('status__in', '0,3', [1, 2, 3, 4]),
+        ('status__in', '1,3', [3, 4]),
+    )
 
     def test_post_order(self):
         resp = self.client.post(
@@ -31,6 +48,30 @@ class OrderTest(TestCase):
             data=self.ORDER_POST_DATA,
         )
         self.assertEquals(resp.status_code, status.HTTP_201_CREATED)
+
+    def test_orderedpizza_list_filters(self):
+
+        # single-using filters
+        for f_name, f_value, f_result in self.FILTERS_PARAMS:
+            resp = self.client.get(
+                reverse('order-list'),
+                {f_name: f_value}
+            )
+            with self.subTest(f'{f_name}: {f_value}'):
+                self.assertEquals(f_result, [o['id'] for o in resp.json()])
+
+        # multiple-using
+        resp = self.client.get(
+            reverse('order-list'),
+            {'customer_email': '1@example.com', 'status': 0}
+        )
+        self.assertEquals([1,2], [o['id'] for o in resp.json()])
+
+        resp = self.client.get(
+            reverse('order-list'),
+            {'customer_email': '1@example.com', 'status': 1}
+        )
+        self.assertEquals([], [o['id'] for o in resp.json()])
 
 
 class OrderedPizzaTest(TestCase):

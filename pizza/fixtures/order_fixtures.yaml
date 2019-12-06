@@ -4,9 +4,10 @@
   fields:
     customer_name: "customer_1"
     customer_phone: "1234567810"
-    customer_email: "customer_1@example.com"
+    customer_email: "1@example.com"
     created: "2019-12-06 18:29:36.946751+00:00"
     updated: "2019-12-06 18:29:36.946751+00:00"
+    status: 0
 
 # second order, with pizzas
 - model: pizza.order
@@ -14,10 +15,11 @@
   fields:
     customer_name: "customer_1"
     customer_phone: "1234567810"
-    customer_email: "customer_1@example.com"
+    customer_email: "1@example.com"
     created: "2019-12-06 18:29:36.946751+00:00"
     updated: "2019-12-06 18:29:36.946751+00:00"
     amount: "4.55"
+    status: 0
 - model: pizza.orderedpizza
   pk: 1
   fields:
@@ -26,3 +28,27 @@
     order_id: 2
     created: "2019-12-06 18:29:36.946751+00:00"
     updated: "2019-12-06 18:29:36.946751+00:00"
+
+# third order, another customer email
+- model: pizza.order
+  pk: 3
+  fields:
+    customer_name: "customer_2"
+    customer_phone: "12345678101"
+    customer_email: "2@example.com"
+    created: "2019-12-06 18:29:36.946751+00:00"
+    updated: "2019-12-06 18:29:36.946751+00:00"
+    amount: "4.55"
+    status: 3
+
+
+- model: pizza.order
+  pk: 4
+  fields:
+    customer_name: "customer_3"
+    customer_phone: "12345678101"
+    customer_email: "3@example.com"
+    created: "2019-12-06 18:29:36.946751+00:00"
+    updated: "2019-12-06 18:29:36.946751+00:00"
+    amount: "4.55"
+    status: 3
