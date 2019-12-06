@@ -1,5 +1,6 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.response import Response
 
 from pizza import const
 from pizza.models import Pizza, Order, OrderedPizza, PizzaPrice
@@ -7,7 +8,10 @@ from pizza.serializers import (
     OrderSerializer,
     OrderedPizzaSerializer,
     PizzaSerializer,
-    PizzaPriceSerializer)
+    PizzaPriceSerializer,
+    OrderUpdateSerializer,
+    OrderedPizzaUpdateSerializer
+)
 
 
 class PizzaViewSet(viewsets.ModelViewSet):
@@ -30,14 +34,13 @@ class PizzaPriceViewSet(viewsets.ModelViewSet):
         :return:
         """
         instance = self.get_object()
-        new_orders_exists = Order.objects.filter(
-            status=const.NEW,
+        in_process_orders_exists = Order.objects.filter(
+            status__lt=const.DELIVERED,
             ordered_pizzas__pizza_price=instance
         ).exists()
-        if new_orders_exists:
-            error_msg = "You can't delete PizzaPrice " \
-                        "while it related to a new Order!"
-            raise PermissionDenied(error_msg)
+        if in_process_orders_exists:
+            raise PermissionDenied("You can't delete PizzaPrice while it "
+                                   "related to a new Order!")
 
         return super().destroy(request, *args, **kwargs)
 
@@ -46,7 +49,49 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     queryset = Order.objects.all()
 
+    def get_serializer_class(self):
+        if self.action in ('update', 'partial_update'):
+            return OrderUpdateSerializer
+        return self.serializer_class
+
+
+def check_order_is_mutable(order):
+    """
+    Function raises PermissionDenied exception
+    if order status is not const.NEW
+    """
+    if order.status != const.NEW:
+        raise PermissionDenied("You can't change order positions "
+                               "after confirmation!")
+
 
 class OrderedPizzaViewSet(viewsets.ModelViewSet):
     serializer_class = OrderedPizzaSerializer
     queryset = OrderedPizza.objects.all()
+
+    def get_serializer_class(self):
+        if self.action in ('update', 'partial_update'):
+            return OrderedPizzaUpdateSerializer
+        return self.serializer_class
+
+    def destroy(self, request, *args, **kwargs):
+        order = self.get_object().order
+        check_order_is_mutable(order)
+        return super().destroy(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        order = self.get_object().order
+        check_order_is_mutable(order)
+        return super().update(request, *args, **kwargs)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        order = serializer.validated_data['order']
+        check_order_is_mutable(order)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(
+            serializer.data,
+            status=status.HTTP_201_CREATED,
+            headers=headers)
