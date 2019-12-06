@@ -1,3 +1,5 @@
+import django_filters
+
 from rest_framework import viewsets, status
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
@@ -45,9 +47,19 @@ class PizzaPriceViewSet(viewsets.ModelViewSet):
         return super().destroy(request, *args, **kwargs)
 
 
+class OrderFilter(django_filters.FilterSet):
+    class Meta:
+        model = Order
+        fields = {
+            'customer_email': ['exact', 'in'],
+            'status': ['exact', 'in'],
+        }
+
+
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     queryset = Order.objects.all()
+    filter_class = OrderFilter
 
     def get_serializer_class(self):
         if self.action in ('update', 'partial_update'):
