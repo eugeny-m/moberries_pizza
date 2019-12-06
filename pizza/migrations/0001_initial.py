@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('customer_comment', models.TextField(blank=True, max_length=1000, verbose_name='Client provided info')),
                 ('amount', models.DecimalField(decimal_places=2, max_digits=5, null=True, verbose_name='Order amount')),
                 ('paid', models.BooleanField(default=False, verbose_name='Order is paid')),
-                ('status', models.IntegerField(choices=[(0, 'NEW'), (1, 'CONFIRMED'), (2, 'DECLINED'), (3, 'SENT_TO_DELIVERY'), (4, 'ON_THE_WAY'), (5, 'DELIVERED')], default=0, verbose_name='Order status')),
+                ('status', models.IntegerField(choices=[(0, 'NEW'), (1, 'CONFIRMED'), (2, 'SENT_TO_DELIVERY'), (3, 'ON_THE_WAY'), (4, 'DELIVERED'), (10, 'DECLINED')], default=0, verbose_name='Order status')),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
             ],
