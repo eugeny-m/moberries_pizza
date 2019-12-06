@@ -112,3 +112,9 @@ class OrderedPizza(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         self.order.update_amount()
+
+    def delete(self, using=None, keep_parents=False):
+        order = self.order
+        res = super().delete(using, keep_parents)
+        order.update_amount()
+        return res
