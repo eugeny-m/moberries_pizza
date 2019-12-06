@@ -11,8 +11,8 @@ from pizza.views import (
 router = routers.SimpleRouter()
 
 router.register(r'pizza', PizzaViewSet)
-router.register(r'pizza_price', PizzaPriceViewSet)
+router.register(r'pizza-price', PizzaPriceViewSet)
 router.register(r'order', OrderViewSet)
-router.register(r'ordered_pizza', OrderedPizzaViewSet)
+router.register(r'ordered-pizza', OrderedPizzaViewSet)
 
 urlpatterns = router.urls
