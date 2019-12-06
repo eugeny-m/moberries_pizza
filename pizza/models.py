@@ -107,7 +107,7 @@ class OrderedPizza(models.Model):
         unique_together = ('pizza_price', 'order')
 
     def get_amount(self) -> Decimal:
-        return self.pizza.price * self.count
+        return self.pizza_price.price * self.count
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
