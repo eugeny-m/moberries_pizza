@@ -1,9 +1,5 @@
 FROM python:3.7
-RUN apt-get update
-
-# install psycopg2 dependencies
-RUN apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev
+RUN apt-get update && updagrade --no-input
 
 COPY . /opt/www/moberries
 WORKDIR /opt/www/moberries
