@@ -1,0 +1,13 @@
+django_secret_key: "secret"
+django_static_root: "/opt/www/moberries/static/"
+time_zone: "UTC"
+debug: true
+allowed_hosts:
+- 127.0.0.1
+- 0.0.0.0
+database:
+ name: "moberries_pizza"
+ host: 127.0.0.1
+ user: "user"
+ port: "5432"
+ password: "password"
