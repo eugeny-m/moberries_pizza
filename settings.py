@@ -11,22 +11,27 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import yaml
+
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Local configuration file
+MBPIZZA_CONF = os.path.join(BASE_DIR, 'conf', 'django.yaml')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
+if not os.path.isfile(MBPIZZA_CONF):
+    raise ImproperlyConfigured('MBPIZZA configuration file not found, aborting')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0he=oy42=95%9mf(-0ntmk207ql!f4qhi6^m(1n#u)u(lje2sc'
+with open(MBPIZZA_CONF) as stream:
+    conf = yaml.load(stream, yaml.FullLoader)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+SECRET_KEY = conf['django_secret_key']
+DEBUG = conf['debug']
 
+ALLOWED_HOSTS = conf['allowed_hosts']
 
 # Application definition
 
@@ -78,8 +83,11 @@ WSGI_APPLICATION = 'wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': conf['database']['name'],
+        'USER': conf['database'].get('user'),
+        'HOST': conf['database'].get('host'),
+        'PORT': conf['database'].get('port'),
     }
 }
 
@@ -100,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = conf['time_zone']
 
 USE_I18N = True
 
