@@ -11,6 +11,8 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - /opt/www/moberries/static:/opt/www/static
       - /tmp/images:/opt/www/images
+    depends_on:
+      - moberries_pizza
 
   # django gunicorn
   moberries_pizza:
