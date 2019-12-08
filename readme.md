@@ -17,13 +17,18 @@ This is a test challenge for moberries interviewing process
 #### How to run:
 
 * download and install docker (https://www.docker.com/products/docker-desktop)
-
 * Pull project from github
 `git clone https://github.com/eugeny-m/moberries_pizza.git`
-* Go to project root
-`cd moberries_pizza`
+* Go to project root `cd moberries_pizza`
 * build image `docker-compose build`
-* run docker services `docker-compose up -d`
+* run docker containers `docker-compose up -d`
+
+if you want to customize some django settings, you can uncomment lines
+`#      - /opt/www/moberries/conf:/opt/www/conf`  
+`#    environment:`  
+`#      MBPIZZA_CONF: /opt/www/conf`  
+in docker-compose.yml and put your own django.yaml   
+version to /opt/www/moberries/conf/
 
 ##### First Run
 
