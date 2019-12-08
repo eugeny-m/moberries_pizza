@@ -5,9 +5,10 @@ debug: true
 allowed_hosts:
 - 127.0.0.1
 - 0.0.0.0
+- localhost
 database:
  name: "moberries_pizza"
- host: 127.0.0.1
+ host: db
  user: "postgres"
  port: "5432"
 # password: "password"
