@@ -23,10 +23,10 @@ This is a test challenge for moberries interviewing process
 * build image `docker-compose build`
 * run docker containers `docker-compose up -d`
 
-if you want to customize some django settings, you can uncomment lines
+if you want to customize some django settings, you can uncomment lines  
 `#      - /opt/www/moberries/conf:/opt/www/conf`  
 `#    environment:`  
-`#      MBPIZZA_CONF: /opt/www/conf`  
+`#      MBPIZZA_CONF: /opt/www/conf/django.yaml`  
 in docker-compose.yml and put your own django.yaml   
 version to /opt/www/moberries/conf/
 
