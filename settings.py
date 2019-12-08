@@ -19,8 +19,8 @@ from django.core.exceptions import ImproperlyConfigured
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Local configuration file
-# (example file is in project_root/django_example.yaml)
-MBPIZZA_CONF = os.path.join(BASE_DIR, 'conf', 'django.yaml')
+# (example file is in project_root/django.yaml)
+MBPIZZA_CONF = os.getenv('MBPIZZA_CONF', 'django.yaml')
 
 if not os.path.isfile(MBPIZZA_CONF):
     raise ImproperlyConfigured('MBPIZZA configuration file not found, aborting')

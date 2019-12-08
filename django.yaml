@@ -1,5 +1,5 @@
 django_secret_key: "secret"
-django_static_root: "/opt/www/moberries/static/"
+django_static_root: "/opt/www/static/"
 time_zone: "UTC"
 debug: true
 allowed_hosts:
@@ -8,6 +8,6 @@ allowed_hosts:
 database:
  name: "moberries_pizza"
  host: 127.0.0.1
- user: "user"
+ user: "postgres"
  port: "5432"
- password: "password"
+# password: "password"
