@@ -47,9 +47,8 @@ class PizzaPrice(models.Model):
 
 class Order(models.Model):
 
-    customer_name = models.CharField('Name', max_length=50, blank=False)
+    customer_name = models.CharField(max_length=50, blank=False)
     customer_email = models.EmailField(null=False, blank=False)
-    # I didn't bother about phone number validation
     customer_phone = models.CharField(
         'Customer`s phone number',
         max_length=13,
@@ -86,7 +85,9 @@ class Order(models.Model):
 
 
 class OrderedPizza(models.Model):
-
+    """
+    Model for storing Order positions
+    """
     pizza_price = models.ForeignKey(
         to='pizza.PizzaPrice',
         related_name='ordered_pizzas',

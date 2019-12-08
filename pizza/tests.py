@@ -56,7 +56,7 @@ class OrderTest(TestCase):
         )
         self.assertEquals(resp.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_orderedpizza_list_filters(self):
+    def test_order_list_filters(self):
 
         # single-using filters
         for f_name, f_value, f_result in self.FILTERS_PARAMS:

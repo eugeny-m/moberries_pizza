@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name='Order',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('customer_name', models.CharField(max_length=50, verbose_name='Name')),
+                ('customer_name', models.CharField(max_length=50)),
                 ('customer_email', models.EmailField(max_length=254)),
                 ('customer_phone', models.CharField(max_length=13, verbose_name='Customer`s phone number')),
                 ('customer_comment', models.TextField(blank=True, max_length=1000, verbose_name='Client provided info')),
