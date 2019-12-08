@@ -17,10 +17,12 @@ services:
     build: .
     image: moberries_pizza:latest
     volumes:
-      - /opt/www/moberries/conf:/opt/www/conf
+#      - /opt/www/moberries/conf:/opt/www/conf
       - /opt/www/moberries/static:/opt/www/static
     command: gunicorn wsgi:application --bind 0.0.0.0:8000 -w 4
     restart: always
+#    environment:
+#      MBPIZZA_CONF: /opt/www/conf
     depends_on:
       - db
 

@@ -1,5 +1,5 @@
 FROM python:3.7
-RUN apt-get update && updagrade --no-input
+RUN apt-get update
 
 COPY . /opt/www/moberries
 WORKDIR /opt/www/moberries
