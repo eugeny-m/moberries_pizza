@@ -34,6 +34,6 @@ This is a test challenge for moberries interviewing process
 #### Endpoints
 
 * localhost/api/v0.1/pizza (Create/change/delete/get pizza)
-* localhost/api/v0.1/pizzaprice (Create/change/delete/get pizza variants (size,price))
+* localhost/api/v0.1/pizza-price (Create/change/delete/get pizza variants (size,price))
 * localhost/api/v0.1/order (Create/change/delete/get order)
-* localhost/api/v0.1/orderedpizza (Create/change/delete/get order position)
+* localhost/api/v0.1/ordered-pizza (Create/change/delete/get order position)
