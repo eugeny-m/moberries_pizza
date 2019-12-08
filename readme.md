@@ -37,3 +37,8 @@ This is a test challenge for moberries interviewing process
 * localhost/api/v0.1/pizza-price (Create/change/delete/get pizza variants (size,price))
 * localhost/api/v0.1/order (Create/change/delete/get order)
 * localhost/api/v0.1/ordered-pizza (Create/change/delete/get order position)
+
+#### Run tests
+* create python environment
+* `pip install -r requirements.txt`
+* `python manage.py test`
