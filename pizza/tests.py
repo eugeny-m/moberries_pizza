@@ -111,6 +111,17 @@ class OrderedPizzaTest(TestCase):
         order.refresh_from_db()
         self.assertEquals(order.amount, price.price)
 
+        # test for Order - PizzaPrice uniqness
+        resp = self.client.post(
+            path=reverse('orderedpizza-list'),
+            data={
+                'count': 2,
+                'pizza_price': price.id,
+                'order': order.id,
+            }
+        )
+        self.assertEquals(resp.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_patch_orderedpizza_new_order(self):
         op = OrderedPizza.objects.get(id=1)
         resp = self.client.patch(
